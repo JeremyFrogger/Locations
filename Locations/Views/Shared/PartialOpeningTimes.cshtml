@@ -1,0 +1,32 @@
+﻿@model Locations.Models.LocationsDetailsViewModel
+
+<table class="table table-borderless">
+    <thead>
+        <tr>
+            <th class="text-center">
+                Day
+            </th>
+            <th class="text-center">
+                Opening
+            </th>
+            <th class="text-center">
+                Closing
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (var i = 0; i < Model.OpeningTimes.Count(); i++)
+        {
+        <tr>
+            <td>
+                @Html.TextBoxFor(modelItem => Model.OpeningTimes[i].DayOfWeek, new { @class = "form-control read-only", @readonly = "readonly" })
+            </td>
+            <td>
+                @Html.DropDownListFor(modelItem => Model.OpeningTimes[i].Opening, new SelectList(Model.Opening, "Value", "Text"), new { @class = "form-control" })
+            </td>
+            <td>
+                @Html.DropDownListFor(modelItem => Model.OpeningTimes[i].Closing, new SelectList(Model.Closing, "Value", "Text"), new { @class = "form-control" })
+            </td>
+        </tr>}
+    </tbody>
+</table>

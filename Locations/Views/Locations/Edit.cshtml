@@ -1,0 +1,65 @@
+﻿@model Locations.Models.LocationsDetailsViewModel
+
+@{
+    ViewBag.Title = "Edit Store Details";
+}
+
+<h3 class="text-primary">@ViewBag.Title</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" class="form-horizontal">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group ">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocationTypeId" class="control-label"></label>
+                <select asp-for="LocationTypeId" class="form-control" asp-items="@Model.LocationTypes"></select>
+                <span asp-validation-for="LocationTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="County" class="control-label"></label>
+                <input asp-for="County" class="form-control" />
+                <span asp-validation-for="County" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="Latitude" />
+                <input type="hidden" asp-for="Longitude" />
+                <label asp-for="PostCode" class="control-label"></label>
+                <input asp-for="PostCode" class="form-control" />
+                <span asp-validation-for="PostCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a class="btn btn-primary" asp-action="Index" asp-route-id="@Model.LocationTypeId">Cancel</a>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <h3>Opening Times</h3>
+        <hr />
+        <div>
+            <partial name="PartialOpeningTimes"/>
+        </div>
+    </div>
+</div>
+

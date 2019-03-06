@@ -1,0 +1,39 @@
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using X.PagedList.Mvc.Common;
+@model Locations.Models.LocationsIndexViewModel
+@{
+    ViewBag.Title = "All Stores";
+}
+<div>
+    <h3 class="d-inline-block text-primary">@ViewBag.Title</h3>
+    <a class="btn btn-sm btn-success float-right new-button" asp-controller="Locations" asp-action="Create"><i class="fa fa-plus fa-fw"></i><strong>New Store</strong></a>
+</div>
+
+<form asp-controller="Locations" asp-action="Index" method="get">
+    <input class="input" type="search" name="SearchString" placeholder="Search for...">
+    <button type="submit" class="btn btn-primary submit"><i class="fa fa-search fa-fw"></i></button>
+    <hr/>
+</form>
+
+<div class="row">
+    @foreach (var location in Model.Locations)
+    {
+        <div class="card store-card">
+            <div class="card-header">
+                <a asp-controller="Locations" asp-action="Details" asp-route-id="@location.Id"><strong>@location.Name</strong></a>
+                <a asp-controller="Locations" asp-action="Edit" asp-route-id="@location.Id" title="Edit"><i class="fa fa-pencil fa-fw"></i></a>
+                <span class="@location.LocationType.Style">@location.LocationType.Description</span>
+            </div>
+            <div class="card-body">
+                @location.Address
+                <br />
+                @location.PostCode
+            </div>
+        </div>
+    }
+</div>
+
+<br />
+        @Html.PagedListPager((IPagedList)Model.Locations, page => Url.Action("Index", new { page = page }), new PagedListRenderOptions { LiElementClasses = new string[] { "page-item" }, PageClasses = new string[] { "page-link" }
+        })
